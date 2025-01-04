@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { getContacts, createContact, getContact, updateContact, deleteContact } = require('../controllers/contact.controller')
+const { getContacts, createContact, getContact, updateContact, deleteContact } = require('../controllers/contact.controller');
+const validateToken = require('../middlewares/validateToken.middleware');
 
+router.use(validateToken);
 router.route('/')
     .get(getContacts)
     .post(createContact);
@@ -9,6 +11,6 @@ router.route('/')
 router.route('/:id')
     .get(getContact)
     .put(updateContact)
-    .delete(deleteContact);
+    .delete(deleteContact); 
 
 module.exports = router;
